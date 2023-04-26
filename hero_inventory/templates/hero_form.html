@@ -1,0 +1,28 @@
+<form moethod="POST">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        <fieldset id="name-field">
+            {{ form.name.label }}            
+            {{ form.name(class = "form-control", placeholder="Name") }}
+        </fieldset>
+        <fieldset id="description-field">
+            {{ form.description.label }}            
+            {{ form.description(class = "form-control", placeholder="Description") }}
+        </fieldset>
+        <fieldset id="comic-field">
+            {{ form.comic_in.label }}            
+            {{ form.comic_in(class = "form-control", placeholder="comic in") }}
+        </fieldset>
+        <fieldset id="power-field">
+            {{ form.super_power.label }}      
+            {{ form.super_power(class = "form-control", placeholder="super power") }}
+        </fieldset>
+        <fieldset id="quote-field">
+            {{ form.random_quote.label }}      
+            {{ form.random_quote(class = "form-control", placeholder="randome marvel quote") }}
+        </fieldset>
+        
+        <!-- Submit Button Area -->
+        {{ form.submit_button(class = "btn btn-primary btn-block mt-2") }}
+    </div>
+</form>
