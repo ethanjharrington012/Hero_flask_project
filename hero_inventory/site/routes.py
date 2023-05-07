@@ -20,27 +20,28 @@ def profile():
     my_hero = HeroForm() #data coming back from my hero
 
     try:
+        print('here I am at the try')
         if request.method == "POST" and my_hero.validate_on_submit():
             name = my_hero.name.data
             description = my_hero.description.data
             comic_in = my_hero.comic_in.data
             super_power = my_hero.super_power.data
             if my_hero.random_quote.data:
-                random_marvel = hero.random_marvel.data
+                random_quote = my_hero.random_quote.data
             else:
-                random_marvel = random_marvel_genorator()
+                random_quote = random_marvel_genorator()
             user_token = current_user.token
 
-            hero = Hero(name, description, comic_in, super_power, random_marvel, user_token)
+            hero = Hero(name, description, comic_in, super_power, random_quote, user_token)
 
             db.session.add(hero)
             db.session.commit()
-
+            print('Should be in the data base')
             return redirect(url_for('site.profile'))
 
     except:
         raise Exception('Hero Not created: please check form again')
-
+    print('missed the exception')
     current_user_token = current_user.token
 
     heros = Hero.query.filter_by(user_token=current_user_token)

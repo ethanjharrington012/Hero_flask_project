@@ -45,12 +45,12 @@ def get_heros(our_user):
 
 # retirve one drone
 
-@api.route('/heros', methods = ['GET'])
+@api.route('/heros<id>', methods = ['GET'])
 @token_required
 def get_hero(our_user, id):
     
     if id:
-        hero = Hero.query.get(id)
+        hero = Hero(hero,name,description,comic_in,super_power, random_marvel, user_token).query.get(id)
         response = hero_schema.dump(hero)
         return jsonify(response)
     else:
@@ -66,13 +66,12 @@ def update_hero(our_user, id):
     hero.description = request.json['description']
     hero.comic_in = request.json['comic_in']
     hero.super_power = request.json['super_power']
-    hero.random_marvel = random_marvel_genorator()
+    hero.random_marvel = ''
     hero.user_token = our_user.token
 
-    print(f"User Token: {our_user.token}")
+    
 
-    hero = Hero(name, description, comic_in, super_power, user_token=user_token)
-
+    
     
     db.session.commit()
 

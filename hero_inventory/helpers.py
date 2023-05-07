@@ -34,7 +34,7 @@ class JSONEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, decimal.Decimal):
             return str(obj)
-        return json.JSONEncoder()
+        return super(JSONEncoder, self).default(obj)
 
 # API
 def random_marvel_genorator():
@@ -46,7 +46,7 @@ def random_marvel_genorator():
         "X-RapidAPI-Host": "marvel-quote-api.p.rapidapi.com"
     }
 
-    response = requests.get(url, headers=headers)
+    response = requests.request("GET",url, headers=headers)
 
     data = response.json()
     return data
